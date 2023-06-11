@@ -26,6 +26,16 @@ app.get("/contact", function(req, res){
   res.render("contact", {contactContent: contactContent});
 });
 
+app.get("/compose", function(req, res){
+  res.render("compose");
+});
+
+app.post("/compose", function(req, res){
+    let frase = req.body.postTitle;
+    console.log(frase);
+    res.redirect("/compose");
+});
+
 app.listen(port, function() {
   console.log("Server started on port "+port);
 });

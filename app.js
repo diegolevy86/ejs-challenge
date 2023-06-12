@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
-  res.render("home", {startingContent: homeStartingContent});
+  res.render("home", {startingContent: homeStartingContent, posts: posts});
 });
 
 app.get("/about", function(req, res){
@@ -31,13 +31,21 @@ app.get("/compose", function(req, res){
   res.render("compose");
 });
 
+app.get("/posts/:postName", function(req, res){
+  posts.forEach(function(post){
+    if (post.title == req.params.postName)
+    {
+      console.log("Match found");
+    }
+  });
+});
+
 app.post("/compose", function(req, res){
     const postData = {
-      title: req.body.postTitle, 
+      title: req.body.postTitle,
       content: req.body.postBody
     };
     posts.push(postData);
-    console.log(posts)
     res.redirect("/");
 });
 

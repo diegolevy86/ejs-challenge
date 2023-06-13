@@ -33,13 +33,18 @@ app.get("/compose", function(req, res){
 });
 
 app.get("/posts/:postName", function(req, res){
+  let count = 0;
   posts.forEach(function(post){
     if (lod.lowerCase(post.title) === lod.lowerCase(req.params.postName))
     {
       res.render("post", {title: post.title, content: post.content});
+      count = 1;
     }
   });
+      if (count === 0)
+      {
       res.render("post", {title: "No post found", content: ""});
+      }
 });
 
 app.post("/compose", function(req, res){

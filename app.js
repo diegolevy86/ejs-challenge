@@ -38,17 +38,15 @@ app.get("/posts/:postName", function(req, res){
     {
       res.render("post", {title: post.title, content: post.content});
     }
-    else
-    {
-      res.render("post", {title: "No post found", content: ""});
-    }
   });
+      res.render("post", {title: "No post found", content: ""});
 });
 
 app.post("/compose", function(req, res){
     const postData = {
       title: req.body.postTitle,
-      content: req.body.postBody
+      content: req.body.postBody,
+      slicedContent: req.body.postBody.slice(0,99)+"..."
     };
     posts.push(postData);
     res.redirect("/");

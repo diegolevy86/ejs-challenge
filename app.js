@@ -51,7 +51,8 @@ app.post("/compose", function(req, res){
     const postData = {
       title: req.body.postTitle,
       content: req.body.postBody,
-      slicedContent: req.body.postBody.slice(0,99)+"..."
+      slicedContent: req.body.postBody.slice(0,99)+"...",
+      kebabTitle: lod.kebabCase(req.body.postTitle)
     };
     posts.push(postData);
     res.redirect("/");
